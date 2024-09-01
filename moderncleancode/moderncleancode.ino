@@ -8,17 +8,20 @@
 #include <LiquidCrystal_I2C.h>
 #include <ThreeWire.h>
 #include <RtcDS1302.h>
-// to shared variables 
+// to shared variables
 #include <globalvariables.h>
 //menu class
 #include <menu.h>
 // timer yearly class
 #include <timerclass.h>
 
-
+// make 3 object to 3 field
+YearlyTimer yearlyTimer1;
+YearlyTimer yearlyTimer2;
+YearlyTimer yearlyTimer3;
 //LiquidCrystal_I2C lcd(0x27, 16, 2); // 16 chars and 2 line display
 
-ThreeWire myWire(Data, SCLK, RST); 
+ThreeWire myWire(Data, SCLK, RST);
 RtcDS1302<ThreeWire> Rtc(myWire);
 
 //setting wifi to connect database and network
@@ -30,8 +33,8 @@ RtcDS1302<ThreeWire> Rtc(myWire);
 #define USER_PASSWORD "M01281691888"
 
 // accsespoint to connect another esp by wbserver (local)
-const char *ssid = "ESP32_AP";      
-const char *password = "12345678";  
+const char *ssid = "ESP32_AP";
+const char *password = "12345678";
 WebServer server(80);
 void handleRoot() {
   server.send(200, "text/plain", "Connected to ESP32");
@@ -41,13 +44,17 @@ void handleRoot() {
 void setup();
 
 void loop() {
-   controlpumbs();
-
-
+  screen();
+  firebase();
+  controlpumbs();
+  now = Rtc.GetDateTime();
+  printDateTime(now);
+  server.handleClient();
+  saveEEprom();
 }
 
 
-void printDateTime(const RtcDateTime& dt) {
+void printDateTime(const RtcDateTime &dt) {
 
   snprintf_P(datestring,
              countof(datestring),

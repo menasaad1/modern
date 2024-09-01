@@ -3,7 +3,7 @@ const char* menuItems[] = {
   "Item 2: control mode",
   "Item 3: state timer"
 };
-bool screentimer = false;
+
 bool inmune = false;
 bool inSubMenu = false;
 bool inscreentimer = false;

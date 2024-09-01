@@ -15,11 +15,11 @@ void screen() {
     displayMenu();
   }
 
-  if ((inSubMenu || inScreentimer || inmune) && (millis() - lastSwitchPressTime) > 20000) {
+  if ((inSubMenu || inscreentimer || inmune) && (millis() - lastSwitchPressTime) > 20000) {
 
     inmune = false;  // Exit menu due to timeout
     inSubMenu = false;
-    inScreentimer = false;
+    inscreentimer = false;
     displaytime();
   }
   if ((up == LOW || down == LOW || set == LOW || ok == LOW) && (millis() - lastDebounceTime) > 200) {
@@ -30,7 +30,6 @@ void screen() {
 
     navigateMenu(menuItems, menuLength, currentMenuIndex);
     if (digitalRead(ok) == LOW) {
-      lastButtonPressTime = currentTime;
       if (currentMenuIndex == 0 || currentMenuIndex == 2) {  // use the timer class and show variables object
         currentSubMenuIndex = 0;
         displaySubMenu();
@@ -45,7 +44,7 @@ void screen() {
       if (digitalRead(set) == LOW) {
         inSubMenu = false;
         choisemune = false;
-        screentimer = false;
+        inscreentimer = false;
         choisemune = false;
         displayMenu();
       }
@@ -63,7 +62,7 @@ void screen() {
     if (choisemune) {
       inmune = false;
       inSubMenu = false;
-      screentimer = true;
+      inscreentimer = true;
       bool timermodeon;  /// in on object there two timer on and off by the menu you send the true to method if timer on true, else false
       if (currentSubMenuIndex == 0) {
         timermodeon = true;
@@ -133,9 +132,9 @@ void navigateMenu(const char* items[], int length, int& index) {
     if (index < 0) {
       index = length - 1;  // Wrap to the last item
     }
-    if (inSubMenu && !screentimer) {
+    if (inSubMenu && !inscreentimer) {
       displaySubMenu();
-    } else if (!inSubMenu && !screentimer) {
+    } else if (!inSubMenu && !inscreentimer) {
       displayMenu();
     }
   }
@@ -146,9 +145,9 @@ void navigateMenu(const char* items[], int length, int& index) {
     if (index >= length) {
       index = 0;  // Wrap to the first item
     }
-    if (inSubMenu && !screentimer) {
+    if (inSubMenu && !inscreentimer) {
       displaySubMenu();
-    } else if (!inSubMenu && !screentimer) {
+    } else if (!inSubMenu && !inscreentimer) {
       displayMenu();
     }
   }

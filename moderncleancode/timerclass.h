@@ -259,7 +259,7 @@ public:
       }
        flagscreen = true;
       inSubMenu = false;
-      screentimer = false;
+      inscreentimer = false;
 
       // Finalize setting
       //  saveToFirebase();
@@ -281,7 +281,7 @@ public:
       settingMonth = true;
     } else if (settingHour) {
       inSubMenu = false;
-      screentimer = false;
+      inscreentimer = false;
       flagscreen = true;
     }
   }

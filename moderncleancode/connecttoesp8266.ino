@@ -1,7 +1,7 @@
 
 void handleReceiveData() {
   if (server.hasArg("data")) {
-    receivedArray = server.arg("data");
+   String receivedArray = server.arg("data");
     
     // Split the received string into individual sensor values
     int data[5];

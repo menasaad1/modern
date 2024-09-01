@@ -62,10 +62,7 @@ void setup() {
   RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
   printDateTime(compiled);
   now = Rtc.GetDateTime();
-  // make 3 object to 3 field
-  YearlyTimer yearlyTimer1;
-  YearlyTimer yearlyTimer2;
-  YearlyTimer yearlyTimer3;
+
   //first send to database
   sendtopreparedatapase();
 }

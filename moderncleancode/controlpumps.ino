@@ -1,11 +1,11 @@
 
-
+bool statefields[3];
 void controlpumbs() {
 
 bool statefields[3];
 //if any field to open by timer or by phone startup the pump
   for (int i = 0; i < 3; i++) {
-    statefields[i] = digitalRead((fieldspins[i]);
+    statefields[i] = digitalRead((fieldspins[i]));
   }
   if (statefields[0] || statefields[1] || statefields[2]) {
     digitalWrite(waterpump, HIGH);
@@ -24,9 +24,9 @@ bool statefields[3];
     // use timer
     if (timermode) {
 
-      yearlyTimer1.Control(field1);
-      yearlyTimer2.Control(field2);
-      yearlyTimer3.Control(field3);
+      yearlyTimer1.Control(field1,now);
+      yearlyTimer2.Control(field2,now);
+      yearlyTimer3.Control(field3,now);
 
     }
 
